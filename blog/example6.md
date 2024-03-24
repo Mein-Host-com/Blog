@@ -1,4 +1,5 @@
 ---
+id: "blog6"
 date: "20.03.2024"
 title: "Blog name6"
 short_description: "Blog description"
