@@ -17,9 +17,9 @@ jobs:
           node-version: '16' # Verwenden Sie die neueste LTS-Version oder die Version, die Ihrem Projekt entspricht
       - name: Install markdownlint
         run: npm install -g markdownlint-cli
-      - name: Run markdownlint on all Markdown files in blog/
+      - name: Run markdownlint on all Markdown files in blogs/
         run: |
-          find blog/ -name "*.md" -exec markdownlint --config .markdownlint.json --fix {} +
+         find blogs/ -name "*.md" -exec markdownlint --config path/to/.markdownlint.json --fix {} +
       - name: Check for valid table and required keys in all Markdown files
         run: |
           required_keys=("id" "date" "title" "short_description" "tags" "author")
