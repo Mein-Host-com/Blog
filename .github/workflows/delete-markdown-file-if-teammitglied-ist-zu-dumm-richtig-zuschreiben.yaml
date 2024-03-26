@@ -3,7 +3,7 @@ name: Check and Delete Invalid Markdown Files in Blogs
 on:
  push:
     paths:
-      - 'blogs/**'
+      - 'blog/**'
 
 jobs:
  check-and-delete-invalid-markdown-files:
