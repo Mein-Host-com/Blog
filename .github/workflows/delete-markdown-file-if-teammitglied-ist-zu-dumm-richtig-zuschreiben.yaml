@@ -11,13 +11,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run markdownlint on all Markdown files in blogs/
+      - name: Run markdownlint on all Markdown files in blog/
         run: |
-          find blogs/ -name "*.md" -exec markdownlint --config .markdownlint.json --fix {} +
+          find blog/ -name "*.md" -exec markdownlint --config .markdownlint.json --fix {} +
       - name: Check for valid table and required keys in all Markdown files
         run: |
           required_keys=("id" "date" "title" "short_description" "tags" "author")
-          find blogs/ -name "*.md" -exec sh -c '
+          find blog/ -name "*.md" -exec sh -c '
             if ! grep -q "^---$" {}; then echo "Invalid table in {}" && rm {} && exit 1; fi
             for key in "${required_keys[@]}"; do
               if ! grep -q "^$key: " {}; then echo "Missing '$key' key in {}" && rm {} && exit 1; fi
