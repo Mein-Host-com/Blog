@@ -1,9 +1,9 @@
-name: Check and Delete Invalid Markdown Files in Blogs
+name: Check and Delete Invalid Markdown Files in Blog
 
 on:
  push:
     paths:
-      - 'blogs/**'
+      - 'blog/**'
 
 jobs:
  check-and-delete-invalid-markdown-files:
@@ -17,13 +17,13 @@ jobs:
           node-version: '14' # Verwenden Sie die neueste LTS-Version oder die Version, die Ihrem Projekt entspricht
       - name: Install markdownlint
         run: npm install -g markdownlint-cli
-      - name: Run markdownlint on all Markdown files in blogs/
+      - name: Run markdownlint on all Markdown files in blog/
         run: |
-          find blogs/ -name "*.md" -exec markdownlint --config .markdownlint.json --fix {} +
+          find blog/ -name "*.md" -exec markdownlint --config .markdownlint.json --fix {} +
       - name: Check for valid table and required keys in all Markdown files
         run: |
           required_keys=("id" "date" "title" "short_description" "tags" "author")
-          find blogs/ -name "*.md" -exec sh -c '
+          find blog/ -name "*.md" -exec sh -c '
             if ! grep -q "^---$" {}; then echo "Invalid table in {}" && rm {} && exit 1; fi
             for key in "${required_keys[@]}"; do
               if ! grep -q "^$key: " {}; then echo "Missing '$key' key in {}" && rm {} && exit 1; fi
