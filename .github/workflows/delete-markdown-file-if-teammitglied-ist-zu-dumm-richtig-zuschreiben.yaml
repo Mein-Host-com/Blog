@@ -1,0 +1,36 @@
+name: Check Blog File
+
+on:
+  push:
+    paths:
+      - 'blog/**'
+
+jobs:
+  check_file:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check if file is Markdown with Specific Content
+      run: |
+        if [[ ${{ github.event_name }} == 'push' ]]; then
+          for file in $(git diff --name-only HEAD^..HEAD); do
+            if [[ $file == Blog/*.md ]]; then
+              if grep -q '---\ndate: "[0-9]{2}.[0-9]{2}.[0-9]{4}"\ntitle: ".*"\nshort_description: ".*"\ntags: \[".*", ".*", ".*"\]\nauthor: ".*"\n---' $file; then
+                echo "$file is a Markdown file with the required content."
+              else
+                echo "$file is a Markdown file missing required content. Deleting..."
+                git rm $file
+              fi
+            fi
+          done
+        fi
+
+    - name: Commit and push changes if any
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Check and delete Markdown files missing required content"
+        git push
