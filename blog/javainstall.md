@@ -1,4 +1,5 @@
 ---
+id: "javainstall"
 date: "09.04.2024"
 title: "Java installieren"
 short_description: "Entdecken Sie, wie Sie verschiedene Versionen von Java auf Ubuntu und Debian installieren, um die Vorteile der neuesten Funktionen zu nutzen und gleichzeitig die Kompatibilität mit älteren Anwendungen zu gewährleisten, in diesem umfassenden Blog-Beitrag."
